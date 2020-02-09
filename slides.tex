@@ -24,6 +24,7 @@
 \usepackage{amssymb}
 \usepackage{hyperref}
 \usepackage{ragged2e}
+\usepackage[authoryear, round]{natbib}
 
 %% For slides in French
 %% \usepackage[french]{babel}
@@ -40,7 +41,7 @@
 
 
 \title{Probabilistic mapping  of the sub-cellular proteome}
-\author[\url{http://lgatto.github.io/about}]{Laurent Gatto}
+\author[]{Laurent Gatto}
 \date{\today}
 \institute[]{CBIO, de Duve Institute, UCLouvain}
 
@@ -101,9 +102,9 @@
 
   \begin{itemize}
 
-  \item \textcolor{SMCSblue}{Mr Oliver Crook}
+  \item \textcolor{Blue}{Mr Oliver Crook}
 
-  \item \textcolor{SMCSblue}{Dr Lisa Breckels}
+  \item \textcolor{Blue}{Dr Lisa Breckels}
 
   \end{itemize}
 
@@ -145,7 +146,7 @@
 
 \begin{frame}{Cell organisation - \textbf{localisation is function}}
   \begin{center}
-    \includegraphics[width=.9\linewidth]{figs/Animal_cell_structure.png} \\
+    \includegraphics[width=.8\linewidth]{figs/Animal_cell_structure.png} \\
     \textbf{\textcolor{Blue}{Spatial proteomics}} is the systematic
     study of protein localisations.
   \end{center}
@@ -159,16 +160,106 @@
 \end{frame}
 
 
+\begin{frame}{}
+
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+
+      \textbf{Explorative/discovery approaches},
+      \textcolor{Blue}{steady-state \textbf{global localisation maps}}
+      (as opposed to microscopy-based targeted approaches).
+
+      \bigskip
+      
+      \small{
+
+        \textbf{Density gradient}: PCP \citep{Dunkley:2006}, LOPIT
+        \citep{Foster2006}, hyperLOPIT
+        \citep{Christoforou:2016,Mulvey:2017} and \\
+
+        \textbf{Differential centrifugation} \cite{Itzhak:2016},
+        LOPIT-DC \citep{Geladaki:2018}.
+
+      }
+     
+      \bigskip
+      
+      
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \includegraphics[width=.78\linewidth]{figs/workflow_primary.pdf}
+    \end{column}    
+  \end{columns}
+  
+\end{frame}
+
+\subsubsection*{The data}
+\label{sec:data}
+
+\begin{frame}{Quantitation data}
+  \begin{center}
+    \begin{tabular}{|l|llll|}
+      \hline
+      & Fraction$_{\text{1}}$ & Fraction$_{\text{2}}$ & \ldots{} & Fraction$_{\text{L}}$ \\
+      \hline
+      {\bf x}$_{\text{1}}$ & $x_{\text{1,1}}$ & $x_{\text{1,2}}$ & \ldots{} & $x_{\text{1,L}}$ \\
+      {\bf x}$_{\text{2}}$ & $x_{\text{2,1}}$ & $x_{\text{2,2}}$ & \ldots{} & $x_{\text{2,L}}$ \\
+      {\bf x}$_{\text{3}}$ & $x_{\text{3,1}}$ & $x_{\text{3,2}}$ & \ldots{} & $x_{\text{3,L}}$ \\
+      \vdots & \vdots & \vdots & \vdots & \vdots \\
+      {\bf x}$_{\text{i}}$ & $x_{\text{i,1}}$ & $x_{\text{i,2}}$ & \ldots{} & $x_{\text{i,L}}$ \\
+      \vdots & \vdots & \vdots & \vdots & \vdots \\
+      {\bf x}$_{\text{N}}$ & $x_{\text{N,1}}$ & $x_{\text{N,2}}$ & \ldots{} & $x_{\text{N, L}}$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}{Quantitation data and organelle markers}
+  \begin{center}
+    \begin{tabular}{|l|llll||l|}
+      \hline
+      & Fraction$_{\text{1}}$ & Fraction$_{\text{2}}$ & \ldots{} & Fraction$_{\text{L}}$ & markers\\
+      \hline
+      {\bf x}$_{\text{1}}$ & $x_{\text{1,1}}$ & $x_{\text{1,2}}$ & \ldots{} & $x_{\text{1,L}}$ & unknown \\
+      {\bf x}$_{\text{2}}$ & $x_{\text{2,1}}$ & $x_{\text{2,2}}$ & \ldots{} & $x_{\text{2,L}}$ & \textcolor{Red}{$loc_{1}$}\\
+      {\bf x}$_{\text{3}}$ & $x_{\text{3,1}}$ & $x_{\text{3,2}}$ & \ldots{} & $x_{\text{3,L}}$ & unknown \\
+      \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+      {\bf x}$_{\text{i}}$ & $x_{\text{i,1}}$ & $x_{\text{i,2}}$ & \ldots{} & $x_{\text{i,L}}$ & \textcolor{Blue}{$loc_{k}$}\\
+      \vdots & \vdots & \vdots & \vdots & \vdots & \vdots\\
+      {\bf x}$_{\text{N}}$ & $x_{\text{N,1}}$ & $x_{\text{N,2}}$ & \ldots{} & $x_{\text{N, K}}$ & unknown \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
 
 %-----------------------------------------------
 % New section
 %-----------------------------------------------
 
-\section{Visualisation}
+\section{Data analysis}
 
 
 \begin{frame}{Visualisation}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.6\linewidth]{figs/F04-analyses.pdf}
+    \caption{From \cite{Gatto:2010}, \textit{Arabidopsis thaliana} data
+      from \cite{Dunkley:2006}}
+  \end{figure}
+\end{frame}
 
+\subsubsection*{Machine learning}
+\label{sec:ml}
+
+\begin{frame}{Problem statement: classification}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{figs/hyperlopit-class.pdf}
+    \caption{Support vector machines classifier (after 5\% FDR
+      classification cutoff) on the embryonic stem cell data from
+      \cite{Christoforou:2016}.}
+  \end{figure}
 \end{frame}
 
 %-----------------------------------------------
@@ -180,6 +271,20 @@
 
 \begin{frame}{Computational challenges}
 
+  \begin{itemize}
+  \item Visualisation (cluster, unsupervised learning)
+  \item Classification (supervised learning)
+  \item \textbf{Novelty detection} (semi-supervised learning)
+  \item Data integration (transfer learning)
+  \item \textbf{Unvertainty quantification}
+  \item \textbf{Multi-localisation}
+  \item \textbf{Spatial dynamics}
+  \end{itemize}
+  \centering
+
+  \bigskip
+
+  {\Large To uncover and understand biology}
 \end{frame}
 
 
@@ -199,10 +304,10 @@
 % New section
 %-----------------------------------------------
 
-\section{Quantifying uncertainty}
+\section{Multi-localisation and uncertainly quantification}
 
 
-\begin{frame}{Quantifying uncertainty}
+\begin{frame}{Multi-localisation}
 
 \end{frame}
 
@@ -231,6 +336,16 @@
 \end{frame}
 
 
+%-----------------------------------------------
+% References
+%-----------------------------------------------
+
+
+\begin{frame}[allowframebreaks]{References}
+  \scriptsize
+  \bibliographystyle{plainnat}
+  \bibliography{refs}
+\end{frame}
 
 
 %-----------------------------------------------
