@@ -39,6 +39,19 @@
 
 \usepackage{xmpincl}
 
+\newcommand{\sidebysidecaption}[4]{%
+\RaggedRight%
+  \begin{minipage}[t]{#1}
+    \vspace*{0pt}
+    #3
+  \end{minipage}
+  \hfill%
+  \begin{minipage}[t]{#2}
+    \vspace*{0pt}
+    #4
+\end{minipage}%
+}
+
 
 \title{Probabilistic mapping  of the sub-cellular proteome}
 \author[]{Laurent Gatto}
@@ -102,9 +115,9 @@
 
   \begin{itemize}
 
-  \item \textcolor{Blue}{Mr Oliver Crook}
+  \item \textcolor{Blue}{Mr Oliver Crook} (Cambridge)
 
-  \item \textcolor{Blue}{Dr Lisa Breckels}
+  \item \textcolor{Blue}{Dr Lisa Breckels} (Cambridge)
 
   \end{itemize}
 
@@ -249,8 +262,16 @@
   \end{figure}
 \end{frame}
 
-\subsubsection*{Machine learning}
-\label{sec:ml}
+\begin{frame}{Quality control}
+  \begin{figure}
+    \includegraphics[width=.3\linewidth]{figs/F04-analyses.pdf}
+    \includegraphics[width=.3\linewidth]{figs/F04-analyses.pdf}
+    \includegraphics[width=.3\linewidth]{figs/F04-analyses.pdf}
+    \caption{Assessing sub-cellular resolution in spatial proteomics
+      experiments \citep{Gatto:2018}}
+  \end{figure}
+\end{frame}
+
 
 \begin{frame}{Problem statement: classification}
   \begin{figure}[h]
@@ -295,8 +316,30 @@
 \section{Novelty detection}
 
 
-\begin{frame}{Novelty detection}
+\begin{frame}{Importance of annotation}
 
+  \begin{columns}[t]
+    \begin{column}[T]{0.43\textwidth}
+      \begin{centering}
+        %% \includegraphics[width=1\linewidth]{figs_all/tan2009r1org.pdf}
+      \end{centering}
+    \end{column}
+    \begin{column}[T]{0.56\textwidth}
+      %% \includegraphics[width=1\linewidth]{figs_all/Animal_cell_structure.png}
+    \end{column}
+  \end{columns}
+  Incomplete annotation, and therefore lack of training data, for
+  many/most organelles. \textit{Drosophila} data from \cite{Tan2009}.
+\end{frame}
+
+\begin{frame}{Semi-supervised learning: novelty detection}
+  \begin{figure}
+    %% \includegraphics[width=.48\linewidth]{figs_all/tan2009r1org.pdf}
+    %% \includegraphics[width=.5\linewidth]{figs_all/pdres2fig.pdf}
+    \caption{Left: Original \textit{Drosophila} data from
+      \cite{Tan2009}. Right: After semi-supervised learning and
+      classification, \cite{Breckels:2013}.}
+  \end{figure}
 \end{frame}
 
 
@@ -306,9 +349,118 @@
 
 \section{Multi-localisation and uncertainly quantification}
 
+\begin{frame}{How much do we learn? How much do we miss?}
+  \begin{figure}
+    \includegraphics[width=.8\linewidth]{./figs/preConcludePlot.png}
+  \end{figure}
+\end{frame}
 
-\begin{frame}{Multi-localisation}
 
+\begin{frame}{A Bayesian Mixture Modelling Approach For Spatial Proteomics}
+
+  \begin{itemize}
+
+    \item<+-> \textit{T Augmented Gaussian Mixture model (TAGM)} is a
+      \textbf{multivariate Gaussian generative model} for MS-based
+      spatial proteomics data. It posits that each annotated
+      sub-cellular niche can be modelled by a multivariate Gaussian
+      distribution.
+
+    \item<+-> With the prior knowledge that many proteins are not
+      captured by known sub-cellular niches, we augment our model with
+      an \textbf{outlier component}. Outliers are often dispersed and
+      thus this additional component is described by a heavy-tailed
+      distribution: the multivariate Student's t-distribution, leading
+      us to a \textit{T Augmented Gaussian Mixture model}
+      \citep{Crook:2018,Crook:2019}.
+
+    \item<+-> This methodology allows proteome-wide
+      \textbf{uncertainty quantification}, thus adding a further layer
+      to the analysis of spatial proteomics.
+
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+
+    We initially model the distribution of profiles associated with
+    proteins that localise to the $k$-th component as multivariate
+    normal with mean vector $\boldsymbol{\mu}_k$ and covariance matrix
+    $\Sigma_k$, so that:
+
+    \begin{align}
+      {\bf x}_i | z_i = k \quad \sim \mathcal{N}(\boldsymbol{\mu}_k, \Sigma_k) \label{equation::preq}
+    \end{align}
+
+    \pause
+
+    We extend it by introducing an additional \textit{outlier
+      component}. To do this, we augment our model by introducing a
+    further indicator latent variable $\phi$. Each protein ${\bf x}_i$
+    is now described by an additional variable $\phi_i$, with $\phi_i
+    = 1$ indicating that protein ${\bf x}_i$ belongs to a organelle
+    derived component and $\phi_i = 0$ indicating that protein ${\bf
+      x}_i$ is not well described by these known components. This
+    outlier component is modelled as a multivariate T distribution
+    with degrees of freedom $\kappa$, mean vector $\bf{M}$, and scale
+    matrix $V$.
+
+    \begin{align}
+      {\bf x}_i | z_i = k, \phi_i \quad \sim \mathcal{N}(\boldsymbol{\mu}_k, \Sigma_k)^{\phi_i}\mathcal{T}(\kappa, \boldsymbol{M}, V)^{1 - \phi_i }
+    \end{align}
+
+
+\end{frame}
+
+
+\begin{frame}{}
+      \begin{figure}
+        \includegraphics[width=1\linewidth]{./figs/tagm_pca_res.pdf}
+        \caption{Assignment of proteins of
+          \textit{unknown} location to one of the annotated
+          classes. The dots are scaled according to the protein
+          assignment probabilities.}
+      \end{figure}
+\end{frame}
+
+\begin{frame}{}
+  \begin{figure}
+    \includegraphics[width=.8\linewidth]{./figs/ConcludePlot.pdf}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \sidebysidecaption{0.55\linewidth}{0.42\linewidth}{
+      \includegraphics[width=1\linewidth]{./figs/Q924C1-prob-1.pdf}
+    }{
+    \caption{\scriptsize \justifying Exportin 5 (Q924C1) forms part of
+      the micro-RNA export machinery, transporting miRNA from the
+      nucleus to the cytoplasm for further processing.  It then
+      translocates back through the nuclear pore complex to return to
+      the nucleus to mediate further transport between nucleus and
+      cytoplasm. The model correctly infers that it most likely
+      localises to the cytosol but there is some uncertainty with this
+      assignment. This uncertainty is reflected in possible assignment
+      of Exportin 5 to the nucleus non-chromatin and reflects the
+      multi-location of the protein.}  }
+    %% NOTE SVM failed to classify exportin 5 to any of the two
+    %% biologically plausible locations, arguably due to the similarity
+    %% of the cytosol and peroxysome, to which it got assigned.
+
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}{Whole sub-cellular proteome uncertainty}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.32\linewidth]{./figs/pca-tagm-mcmc-1.pdf}
+    \includegraphics[width=.32\linewidth]{./figs/pca-tagm-map-1.pdf}
+    \includegraphics[width=.32\linewidth]{./figs/prob-vs-shannon-1.pdf}
+  \end{figure}
 \end{frame}
 
 
@@ -331,9 +483,83 @@
 \section{Behind the scences}
 
 
-\begin{frame}{Behind the scences}
+\begin{frame}{}
+  \begin{center}
+    \Large{\textbf{Behind the scenes}: software/data structures and
+      open research practice.}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}{}
+
+  Beyond the figures\footnote{... which are all reproducible, by the way.}
+
+  \begin{itemize}
+  \item<+-> Software: \textbf{infrastructure}
+    (\href{http://bioconductor.org/packages/MSnbase}{\texttt{MSnbase}},
+    \cite{Gatto:2012}), \textbf{dedicated machine learning}
+    (\href{http://bioconductor.org/packages/pRoloc}{\texttt{pRoloc}},
+    \cite{Gatto:2014a}), \textbf{interactive
+      visualisation}\footnote{\url{https://lgatto.shinyapps.io/christoforou2015/}}
+    (\href{http://bioconductor.org/packages/pRolocGUI}{\texttt{pRolocGUI}},
+    \cite{pRolocGUI}) and \textbf{data}
+    (\href{http://bioconductor.org/packages/pRolocdata}{\texttt{pRolocdata}},
+    \cite{Gatto:2014a}) for spatial proteomics.
+  \item<+-> The \href{http://bioconductor.org/}{\textbf{Bioconductor}}
+    \citep{Huber:2015} ecosystem for high throughput biology data
+    analysis and comprehension: \textbf{open source}, and
+    \textbf{coordinated and collaborative\footnote{between and within
+        domains/software} open development}, enabling
+    \textbf{reproducible research}, enables understanding of the data
+    (not a black box) and \textbf{drive scientific innovation}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Open research: open source software}
+  \centering
+  \begin{figure}
+  %% \includegraphics[width=\linewidth]{./figs_all/pRoloc_screen.png}
+    \caption{\cite{Gatto:2014} Left: Public repository for the \texttt{pRoloc} software
+      (\url{https://github.com/lgatto/pRoloc}). Right: offical
+      Bioconductor page.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Open and reproducible research}
+  \centering
+  \begin{figure}
+    %% \includegraphics[width=1\linewidth]{./figs_all/qsep_screen.png}
+    \caption{\cite{Gatto:2018} reproducible document
+      (\url{https://github.com/lgatto/QSep-manuscript}), preprint
+      (\url{https://doi.org/10.1101/377630}) and paper
+      (\url{https://doi.org/10.1016/j.cbpa.2018.11.015}).}
+  \end{figure}
+\end{frame}
+
+%-----------------------------------------------
+% New section
+%-----------------------------------------------
+
+\section{Conclusions}
+
+
+\begin{frame}[fragile]{Conclusions}
+  \begin{itemize}
+  \item Protein sub-cellular localisation: technologies (hyperLOPIT)
+    and opportunities.
+
+  \item Reliance on computational biology, statistics and dedicated
+    software (\texttt{pRoloc} \textit{et al.}) to interpret data and
+    acquire biological knowledge.
+
+  \item Rigorous computational infrastructure and sound data analysis
+    and interpretation is a \textbf{long term investment}.
+
+  \end{itemize}
 
 \end{frame}
+
 
 
 %-----------------------------------------------
