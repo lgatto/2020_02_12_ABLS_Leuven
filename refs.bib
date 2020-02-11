@@ -921,31 +921,31 @@
 
 @ARTICLE{Geladaki:2019,
   title    = "Combining {LOPIT} with differential ultracentrifugation for
-              high-resolution spatial proteomics",
+	      high-resolution spatial proteomics",
   author   = "Geladaki, Aikaterini and Ko{\v c}evar Britov{\v s}ek, Nina and
-              Breckels, Lisa M and Smith, Tom S and Vennard, Owen L and Mulvey,
-              Claire M and Crook, Oliver M and Gatto, Laurent and Lilley,
-              Kathryn S",
+	      Breckels, Lisa M and Smith, Tom S and Vennard, Owen L and Mulvey,
+	      Claire M and Crook, Oliver M and Gatto, Laurent and Lilley,
+	      Kathryn S",
   abstract = "The study of protein localisation has greatly benefited from
-              high-throughput methods utilising cellular fractionation and
-              proteomic profiling. Hyperplexed Localisation of Organelle
-              Proteins by Isotope Tagging (hyperLOPIT) is a well-established
-              method in this area. It achieves high-resolution separation of
-              organelles and subcellular compartments but is relatively time-
-              and resource-intensive. As a simpler alternative, we here develop
-              Localisation of Organelle Proteins by Isotope Tagging after
-              Differential ultraCentrifugation (LOPIT-DC) and compare this
-              method to the density gradient-based hyperLOPIT approach. We
-              confirm that high-resolution maps can be obtained using
-              differential centrifugation down to the suborganellar and protein
-              complex level. HyperLOPIT and LOPIT-DC yield highly similar
-              results, facilitating the identification of isoform-specific
-              localisations and high-confidence localisation assignment for
-              proteins in suborganellar structures, protein complexes and
-              signalling pathways. By combining both approaches, we present a
-              comprehensive high-resolution dataset of human protein
-              localisations and deliver a flexible set of protocols for
-              subcellular proteomics.",
+	      high-throughput methods utilising cellular fractionation and
+	      proteomic profiling. Hyperplexed Localisation of Organelle
+	      Proteins by Isotope Tagging (hyperLOPIT) is a well-established
+	      method in this area. It achieves high-resolution separation of
+	      organelles and subcellular compartments but is relatively time-
+	      and resource-intensive. As a simpler alternative, we here develop
+	      Localisation of Organelle Proteins by Isotope Tagging after
+	      Differential ultraCentrifugation (LOPIT-DC) and compare this
+	      method to the density gradient-based hyperLOPIT approach. We
+	      confirm that high-resolution maps can be obtained using
+	      differential centrifugation down to the suborganellar and protein
+	      complex level. HyperLOPIT and LOPIT-DC yield highly similar
+	      results, facilitating the identification of isoform-specific
+	      localisations and high-confidence localisation assignment for
+	      proteins in suborganellar structures, protein complexes and
+	      signalling pathways. By combining both approaches, we present a
+	      comprehensive high-resolution dataset of human protein
+	      localisations and deliver a flexible set of protocols for
+	      subcellular proteomics.",
   journal  = "Nat. Commun.",
   volume   =  10,
   number   =  1,
@@ -953,4 +953,42 @@
   month    =  jan,
   year     =  2019,
   language = "en"
+}
+
+
+@ARTICLE{Crook:2019b,
+  title         = "{Semi-Supervised} {Non-Parametric} Bayesian Modelling of
+		   Spatial Proteomics",
+  author        = "Crook, Oliver M and Lilley, Kathryn S and Gatto, Laurent and
+		   Kirk, Paul D W",
+  abstract      = "Understanding sub-cellular protein localisation is an
+		   essential component to analyse context specific protein
+		   function. Recent advances in quantitative mass-spectrometry
+		   (MS) have led to high resolution mapping of thousands of
+		   proteins to sub-cellular locations within the cell. Novel
+		   modelling considerations to capture the complex nature of
+		   these data are thus necessary. We approach analysis of
+		   spatial proteomics data in a non-parametric Bayesian
+		   framework, using mixtures of Gaussian process regression
+		   models. The Gaussian process regression model accounts for
+		   correlation structure within a sub-cellular niche, with each
+		   mixture component capturing the distinct correlation
+		   structure observed within each niche. Proteins with a priori
+		   labelled locations motivate using semi-supervised learning
+		   to inform the Gaussian process hyperparameters. We moreover
+		   provide an efficient Hamiltonian-within-Gibbs sampler for
+		   our model. Furthermore, we reduce the computational burden
+		   associated with inversion of covariance matrices by
+		   exploiting the structure in the covariance matrix. A tensor
+		   decomposition of our covariance matrices allows extended
+		   Trench and Durbin algorithms to be applied it order to
+		   reduce the computational complexity of inversion and hence
+		   accelerate computation. A stand-alone R-package implementing
+		   these methods using high-performance C++ libraries is
+		   available at: https://github.com/ococrook/toeplitz",
+  month         =  mar,
+  year          =  2019,
+  archivePrefix = "arXiv",
+  primaryClass  = "stat.AP",
+  eprint        = "1903.02909"
 }

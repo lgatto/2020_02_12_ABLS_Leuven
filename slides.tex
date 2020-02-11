@@ -123,7 +123,9 @@ transfer learning, \texttt{pRoloc} and \texttt{pRolocdata}.
 \textcolor{Blue}{Mr Oliver Crook}, Cambridge: Bayesian spatial
 proteomics, \texttt{pRoloc} and \texttt{pRolocdata}.
 
+\bigskip
 
+Funding: BBSRC, Wellcome Trust
 
 \end{frame}
 
@@ -174,6 +176,32 @@ proteomics, \texttt{pRoloc} and \texttt{pRolocdata}.
   \tiny Image from Wikipedia
   \url{http://en.wikipedia.org/wiki/Cell_(biology)}.
 \end{frame}
+
+
+%% \begin{frame}{Spatial proteomics - Why?}
+
+%%   \begin{itemize}
+
+%%   \item \textbf{Localisation is function}: Localisation and
+%%     sequestration of proteins within sub-cellular niches is a
+%%     fundamental mechanism for the post-translational regulation of
+%%     protein function.
+
+%%     \bigskip
+
+%%   \item \textbf{Re-localisation}: \textcolor{Blue}{differentiation}
+%%     stem cells, \textcolor{Blue}{activation} of biological processes.
+
+%%     \bigskip
+
+%%   \item \textbf{Mis-localisation}: Disruption of the
+%%     targeting/trafficking process alters proper sub-cellular
+%%     localisation, which in turn perturb the cellular functions of the
+%%     proteins.
+
+%%   \end{itemize}
+
+%% \end{frame}
 
 
 \begin{frame}{}
@@ -470,7 +498,56 @@ proteomics, \texttt{pRoloc} and \texttt{pRolocdata}.
 
 
 \begin{frame}{Spatial dynamics}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{./figs/lps.pdf}
+    \caption{Spatial maps of unstimulated and LPS-treated cells
+      (combined triplicates).}
+  \end{figure}
+\end{frame}
 
+
+\begin{frame}
+  A probabilistic definition of differential localisation:
+
+  \begin{align}
+    {x}_i = p ( z_{i, 1} \neq z_{i, 2} )
+  \end{align}
+
+  with
+
+  \begin{itemize}
+  \item organelle-specific profiles modelled as mixtures of Gaussian
+    process regression models \citep{Crook:2019b};
+  \item explicit modelling of replicates;
+  \item no assumption with regard to similarity between conditions;
+  \item rigorous interpretation of the results and uncertainty
+    quantification of differential localisation.
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{./figs/rankboxplot.pdf}
+    \caption{Proteins ranked based on their probability of being
+      differentially localised, i.e. having been assigned different
+      niches in the control and experimental condition.}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth]{./figs/vioplotInformative.pdf}
+    \caption{\textbf{\textcolor{Blue}{Differential localisation
+          probabilites}} (\textbf{left}) provide excellent
+      discrimination of differentially localised (1) vs. static
+      proteins (2).}
+  \end{figure}
 \end{frame}
 
 
