@@ -501,8 +501,9 @@ Funding: BBSRC, Wellcome Trust
   \begin{figure}[h]
     \centering
     \includegraphics[width=\linewidth]{./figs/lps.pdf}
-    \caption{Spatial maps of unstimulated and LPS-treated cells
-      (combined triplicates).}
+    \caption{Spatial maps of unstimulated (\textbf{control}) and
+      LPS-treated (\textbf{experimental condition}) cells (combined
+      triplicates).}
   \end{figure}
 \end{frame}
 
@@ -517,11 +518,12 @@ Funding: BBSRC, Wellcome Trust
   with
 
   \begin{itemize}
-  \item organelle-specific profiles modelled as mixtures of Gaussian
-    process regression models \citep{Crook:2019b};
-  \item explicit modelling of replicates;
-  \item no assumption with regard to similarity between conditions;
-  \item rigorous interpretation of the results and uncertainty
+  \item organelle-specific profiles modelled with mixtures of Gaussian
+    process regressions \citep{Crook:2019b};
+  \item explicit modelling of replicates and their variability;
+  \item no assumption with regard to similarity of gradients between
+    conditions;
+  \item rigorous interpretation of the results with uncertainty
     quantification of differential localisation.
   \end{itemize}
 
@@ -545,7 +547,7 @@ Funding: BBSRC, Wellcome Trust
     \includegraphics[width=\linewidth]{./figs/vioplotInformative.pdf}
     \caption{\textbf{\textcolor{Blue}{Differential localisation
           probabilites}} (\textbf{left}) provide excellent
-      discrimination of differentially localised (1) vs. static
+      discrimination betwee static (1) and differentially localised
       proteins (2).}
   \end{figure}
 \end{frame}
