@@ -64,51 +64,41 @@
 
 \pdfinfo {/Author(Laurent Gatto - UCLouvain)}
 
+%-----------------------------------------------
+% Abstract
+%-----------------------------------------------
+
+%% Abstract: In biology, localisation is function - understanding the
+%% sub-cellular localisation of proteins is paramount to comprehend
+%% the context and full extend of their functions. Shotgun mass
+%% spectrometry-based spatial proteomics method are orthogonal to
+%% widely used targeted microscopy-based assay. In conjunction with
+%% contemporary machine learning, the former enable to build
+%% proteome-wide protein localisation maps, informing us on the
+%% location of thousands of proteins. When studying these
+%% proteome-wide spatial maps, one can learn that while some proteins
+%% can be found in a single location within a cell, up to half of the
+%% proteins may reside in multiple locations, can dynamically
+%% re-localise, or reside within an unknown functional compartment,
+%% leading to considerable uncertainty in associating proteins to
+%% their sub-cellular location. Recent Bayesian modelling approaches
+%% enable us to mine these data, and in particular the dynamic
+%% fraction of the spatial proteome, in much greater depth. We are now
+%% in a position to (1) probabilistically model protein localisation
+%% as well as quantify the uncertainty in the location assignments,
+%% and (2) compute a probability for, and quantify uncertainty in,
+%% whether a protein is differentially localised upon cellular
+%% perturbation. These computational approaches lead to better and
+%% more trustworthy biological interpretation of these rich spatial
+%% proteomics data.
 
 %-----------------------------------------------
 % Title page
 %-----------------------------------------------
 
+
 \begin{frame}[plain]
 \titlepage
-\end{frame}
-
-
-\begin{frame}%[noframenumbering]
-%\thispagestyle{empty}
-
-% Logo UCL a gauche
-%% \begin{tikzpicture}
-%%   \useasboundingbox (0,0) rectangle(\the\paperwidth,1);
-%%   \node[inner sep=0pt] at (1.7,.5) {\includegraphics[width=.33\textwidth]{UCL_2018}};
-%%  \end{tikzpicture}
-
-\justify
-
-{\small \textbf{Abstract:} In biology, localisation is function -
-  understanding the sub-cellular localisation of proteins is paramount
-  to comprehend the context and full extend of their
-  functions. Shotgun mass spectrometry-based spatial proteomics method
-  are orthogonal to widely used targeted microscopy-based assay. In
-  conjunction with contemporary machine learning, the former enable to
-  build proteome-wide protein localisation maps, informing us on the
-  location of thousands of proteins. When studying these proteome-wide
-  spatial maps, one can learn that while some proteins can be found in
-  a single location within a cell, up to half of the proteins may
-  reside in multiple locations, can dynamically re-localise, or reside
-  within an unknown functional compartment, leading to considerable
-  uncertainty in associating proteins to their sub-cellular
-  location. Recent Bayesian modelling approaches enable us to mine
-  these data, and in particular the dynamic fraction of the spatial
-  proteome, in much greater depth. We are now in a position to (1)
-  probabilistically model protein localisation as well as quantify the
-  uncertainty in the location assignments, and (2) compute a
-  probability for, and quantify uncertainty in, whether a protein is
-  differentially localised upon cellular perturbation. These
-  computational approaches lead to better and more trustworthy
-  biological interpretation of these rich spatial proteomics data.  }
-
-
 \end{frame}
 
 
@@ -366,7 +356,7 @@ Funding: BBSRC, Wellcome Trust
     \caption{Left: Original \textit{Drosophila} data from
       \cite{Tan2009}. Right: After semi-supervised learning and
       classification, \cite{Breckels:2013}. Under development:
-      Bayesian novelty detection (Novelty-TAGM).}
+      Bayesian novelty detection (Novelty-TAGM, see below).}
   \end{figure}
 \end{frame}
 
@@ -538,7 +528,8 @@ Funding: BBSRC, Wellcome Trust
     \includegraphics[width=\linewidth]{./figs/rankboxplot.pdf}
     \caption{Proteins ranked based on their probability of being
       differentially localised, i.e. having been assigned different
-      niches in the control and experimental condition.}
+      niches in the control and experimental condition. Orange: TP,
+      blue: FP.}
   \end{figure}
 \end{frame}
 
